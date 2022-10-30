@@ -1,0 +1,57 @@
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-5">
+        <p style="color: green"><%= notice %></p>
+        <br>
+        <div class="card h-auto">
+          <div class="card-header p-3">
+            <h5 class="mb-0"><i class="bi bi-list-task me-2"></i>Task Details</h5>
+          </div>
+          <div class="card-body h-auto" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+            <%= form_with(model: task) do |form| %>
+              <% if task.errors.any? %>
+                <div style="color: red">
+                  <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+                  <ul>
+                    <% task.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <fieldset enable>
+                <div class="mb-3">
+                  <%= form.label :title, class: "form-label", style: "display: block" %>
+                  <%= form.text_field :title %>
+                </div>
+                <div class="mb-3">
+                  <%= form.label :content, class: "form-label", style: "display: block" %>
+                  <%= form.text_area :content %>
+                  <label class="form-label">Content: <%= @task.content%></label>
+                </div>
+                <div class="mb-3">
+                  <%= form.label :due_date, class: "form-label", style: "display: block" %>
+                  <%= form.date_field :due_date %>
+                </div>
+                <div class="="mb-3>
+                  <%= form.label :completed, style: "display: block" %>
+                  <%= form.check_box :completed %>
+                </div>
+                <div>
+                  <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+                </div>
+              </fieldset>
+            <% end %>
+            <% render @task %>
+          </div>
+          <div class="card-footer text-end p-3">
+            <%= link_to " Back", tasks_path, class: "bi bi-arrow-left-circle btn btn-outline-primary btn-sm" %>
+            <%#= link_to " Show", edit_task_path(@task), class: "bi bi-eye btn btn-outline-primary btn-sm"  %> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

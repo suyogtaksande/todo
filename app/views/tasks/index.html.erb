@@ -1,0 +1,68 @@
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+        <p id="notice" style="color: green"><%= notice %></p>
+        <br>
+        <div class="card">
+          <div class="card-header p-3">
+            <div class="col-auto">
+              <h5 class="mb-0 float-start"><i class="bi bi-list-task me-2"></i>Todo List</h5>
+              <%= link_to "New task", new_task_path , class: "float-end btn btn-outline-primary btn-sm"%>
+            </div>
+          </div>
+          <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">Due Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <%= render task %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer text-end p-3">
+            <%= form_with url: tasks_send_mail_path, class: "form-inline", method: :post, remote: true do |form| %>
+              <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                  <label for="Email" class="col-form-label">Email:</label>
+                </div>
+                <div class="col-auto">
+                  <%= form.email_field :email, class: "form-control", placeholder: "batman@example.com", onchange: "toggleButton()" %>
+                </div>
+                <div class="col-auto">
+                  <span id="passwordHelpInline" class="form-text">
+                    Input email-id to get notified for upcomming tasks.
+                  </span>
+                </div>
+                <div class="col-auto">
+                  <%= form.submit "Notify", class: "btn btn-outline-primary btn-sm", id: 'notify', disabled: true %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  function toggleButton()
+  {
+    var email = $('#email').val();
+
+    if (email) {
+      $('#notify').attr('disabled', false);
+    } else {
+      $('#notify').attr('disabled', true);
+    }
+  }
+</script>

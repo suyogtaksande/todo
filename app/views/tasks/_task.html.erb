@@ -1,0 +1,26 @@
+<tr class="fw-normal" id="<%= dom_id task %>">
+  <th>
+    <span class="ms-0"><%= task.title %></span>
+  </th>
+  <td class="align-middle">
+    <% if action_name == 'index'%>
+      <span><%= task.content.truncate(60) %></span>
+    <% else %>
+      <span><%= task.content %></span>
+    <% end %>
+  </td>
+  <td class="align-middle">
+    <span><%= action_name == 'index' ? task.due_date.strftime('%d %b %Y') : task.due_date %></span>
+  </td>
+  <td class="align-middle">
+    <h6 class="mb-0">
+      <span class="badge <%= task.completed ? 'bg-success' : 'bg-danger' %>"><%= task.completed ? 'Completed' : 'In-complete' %></span></h6>
+  </td>
+  <% if action_name == 'show' || action_name == 'index'%>
+    <td class="align-middle">
+      <%= link_to '', edit_task_path(task), class: "bi bi-pencil-square" %>
+      <%= link_to '', task, class: "bi bi-eye" %>
+      <%= link_to '', task, class: "red bi bi-trash", method: :delete, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" } %>
+    </td>
+  <% end %>
+</tr>

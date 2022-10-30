@@ -1,0 +1,39 @@
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-5">
+        <p style="color: green"><%= notice %></p>
+        <br>
+        <div class="card">
+          <div class="card-header p-3">
+            <h5 class="mb-0"><i class="bi bi-list-task me-2"></i>Task Details</h5>
+          </div>
+          <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+            <form>
+              <fieldset disabled>
+                <div>
+                  <label class="form-label">Status: <span class="badge <%= @task.completed ? 'bg-success' : 'bg-danger' %>"><%= @task.completed ? 'Completed' : 'In-complete' %></span></label>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Task: <%= @task.title%></label>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Content: <%= @task.content%></label>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Due Date: <%= @task.due_date.strftime('%d-%m-%Y') %></label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <% if action_name == 'show'%>
+            <div class="card-footer text-end p-3">
+              <%= link_to " Back", tasks_path, class: "bi bi-arrow-left-circle btn btn-outline-primary btn-sm" %>
+              <%= link_to " Edit", edit_task_path(@task), class: "bi bi-pencil-square btn btn-outline-primary btn-sm"  %> 
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
